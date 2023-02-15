@@ -1,0 +1,8 @@
+asgiref==3.6.0
+Django==4.1.7
+greenlet==2.0.2
+six==1.16.0
+SQLAlchemy==2.0.3
+sqlalchemy-fsm==2.0.12
+sqlparse==0.4.3
+typing_extensions==4.5.0
