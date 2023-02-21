@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if form_submitted %}
+    <script>
+        (function(){
+            alert('Se ha generado la proforma!');
+        })();
+    </script>
+    {% endif %}
+    <title>Creación de proformas</title>
+</head>
+<body>
+    <h1>Creación de Proformas</h1>
+    <form action="/proformas/create/" method="post">
+        <label for="full_name">Nombres completos: </label>
+        <input id="full_name" type="text" name="full_name">
+        <label for="date">Fecha de creación: </label>
+        <input id="date" type="date" name="date" min="1950-01-01" max="2025-12-31">
+        <label for="total_value">Valor total: </label>
+        <input id="total_value" type="number" name="total_value" step="0.01">
+        <input type="submit" value="Crear">
+    </form>
+    <a href="{% url 'index' %}">Listado de Proformas</a>
+</body>
+</html>
