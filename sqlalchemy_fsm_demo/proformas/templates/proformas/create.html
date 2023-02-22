@@ -10,23 +10,23 @@
     {% if form_submitted %}
     <script>
         (function(){
-            alert('Se ha generado la proforma!');
+            alert('Purchase order generated!');
         })();
     </script>
     {% endif %}
-    <title>Creación de proformas</title>
+    <title>Purchase Order Generation</title>
 </head>
 <body>
-    <h1>Creación de Proformas</h1>
+    <h1>Purchase Order Generation</h1>
     <form action="/proformas/create/" method="post" class="form-new">
-        <label for="full_name">Nombres completos: </label>
+        <label for="full_name">Full names: </label>
         <input id="full_name" type="text" name="full_name">
-        <label for="date">Fecha de creación: </label>
+        <label for="date">Creation Date: </label>
         <input id="date" type="date" name="date" min="1950-01-01" max="2025-12-31">
-        <label for="total_value">Valor total: </label>
+        <label for="total_value">Total Value: </label>
         <input id="total_value" type="number" name="total_value" step="0.01">
-        <input type="submit" value="Crear">
+        <input type="submit" value="Create">
     </form>
-    <a href="{% url 'index' %}">Listado de Proformas</a>
+    <a href="{% url 'index' %}">Purchase Orders</a>
 </body>
 </html>

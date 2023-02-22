@@ -7,40 +7,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'proformas/style.css' %}">
-    <title>Generador de proformas</title>
+    <title>Purchase Order generator</title>
   </head>
   <body>
-    <h1>Listado de proformas</h1>
+    <h1>Purchase Orders</h1>
     <table class="styled-table">
         <thead>
             <tr>
-                <th>Proforma N°</th>
-                <th>Nombres completos</th>
-                <th>Fecha de creación</th>
-                <th>Valor de la Proforma</th>
-                <th>Estado actual</th>
-                <th colspan="4">Opciones</th>
+                <th>Order N°</th>
+                <th>Full Names</th>
+                <th>Creation Date</th>
+                <th>Total Value</th>
+                <th>Current State</th>
+                <th colspan="4">Options</th>
             </tr>
         </thead>
        <tbody>
-        {% for proforma in proformas %}
+        {% for order in orders %}
         <tr>
-            <td>{{ proforma.id }}</td>
-            <td>{{ proforma.full_name }}</td>
-            <td>{{ proforma.creation_date }}</td>
-            <td>${{ proforma.total_value }}</td>
-            <td>{{ proforma.state }}</td>
+            <td>{{ order.id }}</td>
+            <td>{{ order.full_name }}</td>
+            <td>{{ order.creation_date }}</td>
+            <td>${{ order.total_value }}</td>
+            <td>{{ order.state }}</td>
             <form action="/proformas/update/" method="post">
-                <input type="hidden" name="pk" id="pk" value="{{ proforma.id }}"/>
-                <td><button name="state" type="submit" value="aprobada">Aceptar</button></td>
-                <td><button name="state" type="submit" value="credito">Otorgar crédito</button></td>
-                <td><button name="state" type="submit" value="pagada">Cancelada</button></td>
-                <td><button name="state" type="submit" value="anulada" formaction="/proformas/delete/">Anular</button></td>
+                <input type="hidden" name="pk" id="pk" value="{{ order.id }}"/>
+                <td><button name="state" type="submit" value="approved">Approve</button></td>
+                <td><button name="state" type="submit" value="credit">Grant credit</button></td>
+                <td><button name="state" type="submit" value="paid">Paid</button></td>
+                <td><button name="state" type="submit" value="void" formaction="/proformas/delete/">Void</button></td>
             </form>
         </tr>
         {% endfor %}
        </tbody>
     </table>
-    <a href="{% url 'create' %}">Crear Proforma</a>
+    <a href="{% url 'create' %}">Create Purchase Order</a>
   </body>
 </html>

@@ -1,7 +1,4 @@
 body {
-    margin-left: auto;
-    margin-right: auto;
-    width: 65%;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -20,7 +17,10 @@ a:visited {
 
 .styled-table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
