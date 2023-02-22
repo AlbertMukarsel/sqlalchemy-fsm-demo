@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# Apps listed here are the ones that do not interact with Django ORM
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "proformas.apps.ProformasConfig",
 ]
 
+# Same case as the apps
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -78,22 +80,18 @@ sa_engine = create_engine(DB_CONNECTION_URL, pool_recycle=POOL_RECYCLE)
 Session = orm.sessionmaker(bind=sa_engine)
 session = Session()
 
+# DATABASES setting variable commented once everything related to the ORM is removed
+
 # DATABASES = {
-#     'default': {
-#         'ENGINE': sa_engine,
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "fsm_db",
+#         "USER": "demo",
+#         "PASSWORD": "supersafepassword",
+#         "HOST": "localhost",
+#         "PORT": "5432",
 #     }
 # }
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "fsm_db",
-        "USER": "demo",
-        "PASSWORD": "supersafepassword",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -131,6 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
 # Default primary key field type

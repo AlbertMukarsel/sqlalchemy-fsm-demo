@@ -7,6 +7,8 @@ from sqlalchemy_fsm import FSMField, transition
 Base = declarative_base()
 
 
+# Class object with two methods, no need to call specifically its methods
+# it will execute them based on the source state
 @transition(target="pagada")
 class ProformaHandler(object):
     @transition(source="aceptada")
@@ -18,6 +20,7 @@ class ProformaHandler(object):
         instance.side_effect = "Proforma otorgada crédito fue cancelada"
 
 
+# Generating a SA class, differs from a Django model
 class Proforma(Base):
     __tablename__ = "proformas"
     id = Column(Integer, primary_key=True)
@@ -36,6 +39,8 @@ class Proforma(Base):
     def __repr__(self) -> str:
         return f"Proforma({self.full_name},{self.creation_date},{self.total_value},{self.state})"
 
+    # Verifying if the proforma value is greater than or equal to 200
+    # in order to grant credit
     def check_value(self) -> bool:
         if self.total_value >= 200:
             return True
@@ -45,6 +50,7 @@ class Proforma(Base):
     def accept(self):
         print("Proforma aceptada")
 
+    # Using a condition to verify it the state transition can be done
     @transition(source="aceptada", target="credito", conditions=[check_value])
     def give_credit(self):
         print("Proforma procesada a credito")
