@@ -1,9 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'proformas/style.css' %}">
     {% if form_submitted %}
     <script>
         (function(){
@@ -15,7 +18,7 @@
 </head>
 <body>
     <h1>Creación de Proformas</h1>
-    <form action="/proformas/create/" method="post">
+    <form action="/proformas/create/" method="post" class="form-new">
         <label for="full_name">Nombres completos: </label>
         <input id="full_name" type="text" name="full_name">
         <label for="date">Fecha de creación: </label>

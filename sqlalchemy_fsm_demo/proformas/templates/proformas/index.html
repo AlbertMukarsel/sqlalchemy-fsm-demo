@@ -6,18 +6,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'proformas/style.css' %}">
     <title>Generador de proformas</title>
   </head>
   <body>
     <h1>Listado de proformas</h1>
-    <table>
-        <tr>
-            <th>Proforma N°</th>
-            <th>Nombres completos</th>
-            <th>Fecha de creación</th>
-            <th>Valor de la Proforma</th>
-            <th>Estado actual</th>
-        </tr>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Proforma N°</th>
+                <th>Nombres completos</th>
+                <th>Fecha de creación</th>
+                <th>Valor de la Proforma</th>
+                <th>Estado actual</th>
+                <th colspan="4">Opciones</th>
+            </tr>
+        </thead>
+       <tbody>
         {% for proforma in proformas %}
         <tr>
             <td>{{ proforma.id }}</td>
@@ -34,6 +39,7 @@
             </form>
         </tr>
         {% endfor %}
+       </tbody>
     </table>
     <a href="{% url 'create' %}">Crear Proforma</a>
   </body>

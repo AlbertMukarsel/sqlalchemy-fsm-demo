@@ -1,9 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from proformas.models import Base, Proforma
 from sqlalchemy_fsm_demo.settings import sa_engine, session
 from datetime import datetime
-import json
 
 Base.metadata.create_all(sa_engine)
 
@@ -44,25 +42,20 @@ def update(request):
     if request.method == "POST":
         data = request.POST
         current_file = session.query(Proforma).get(data["pk"])
+        result = "Proforma actualizada"
         if data["state"] == "aprobada":
             current_file.accept.set()
         elif data["state"] == "credito":
             try:
                 current_file.give_credit.set()
             except Exception:
-                return HttpResponse(
-                    'No se puede otorgar credito </br><a href="/proformas/">Listado de Proformas</a>'
-                )
+                result = "No se puede otorgar crédito"
         elif data["state"] == "pagada":
             try:
                 current_file.pago.set()
             except:
-                return HttpResponse(
-                    'No se puede cancelar hasta aceptarse primero </br><a href="/proformas/">Listado de Proformas</a>'
-                )
-    return HttpResponse(
-        'Proforma actualizada </br><a href="/proformas/">Listado de Proformas</a>'
-    )
+                result = "No se puede cancelar hasta aceptarse primero"
+    return render(request, "proformas/result.html", {"resultado": result})
 
 
 def delete(request):
@@ -71,6 +64,4 @@ def delete(request):
         current_file = session.query(Proforma).get(data["pk"])
         session.delete(current_file)
         session.commit()
-    return HttpResponse(
-        'Proforma eliminada </br><a href="/proformas/">Listado de Proformas</a>'
-    )
+    return render(request, "proformas/result.html", {"resultado": "Proforma eliminada"})
